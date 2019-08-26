@@ -1,0 +1,55 @@
+pipeline {
+
+    agent any
+
+    triggers {
+        upstream(upstreamProjects: 'vapor-ware/buildpack-deps/master', threshold: hudson.model.Result.SUCCESS)
+    }
+
+    stages {
+        stage('Sync') {
+            steps {
+                sh './update.sh'
+            }
+        }
+
+        stage('Build') {
+            parallel {
+                stage("Build node:11") {
+                    steps {
+                        sh "docker build -t vaporio/node:11 11/bionic"
+                    }
+                }
+
+                stage("Build node:12") {
+                    steps {
+                        sh "docker build -t vaporio/node:12 12/bionic"
+                    }
+                }
+
+                stage("Build node:13") {
+                    steps {
+                        sh "docker build -t vaporio/node:13 13/bionic"
+                    }
+                }
+
+                stage("Build node:14") {
+                    steps {
+                        sh "docker build -t vaporio/node:14 14/bionic"
+                    }
+                }
+            }
+        }
+
+        stage('Publish') {
+            steps {
+                withDockerRegistry(registry: [credentialsId: 'vio-docker-hub']) {
+                    sh "docker push vaporio/node:11"
+                    sh "docker push vaporio/node:12"
+                    sh "docker push vaporio/node:13"
+                    sh "docker push vaporio/node:14"
+                }
+            }
+        }
+    }
+}

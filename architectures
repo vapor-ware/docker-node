@@ -1,5 +1,5 @@
 bashbrew-arch   variants
-amd64    jessie,jessie-slim,stretch,stretch-slim,buster,buster-slim,alpine3.9,alpine3.10,alpine3.11
+amd64    jessie,jessie-slim,stretch,stretch-slim,buster,buster-slim,alpine3.9,alpine3.10,alpine3.11,bionic
 arm32v6  jessie,jessie-slim,stretch,stretch-slim,buster,buster-slim,alpine3.9,alpine3.10,alpine3.11
 arm32v7  jessie,jessie-slim,stretch,stretch-slim,buster,buster-slim,alpine3.9,alpine3.10,alpine3.11
 arm64v8  jessie,jessie-slim,stretch,stretch-slim,buster,buster-slim,alpine3.9,alpine3.10,alpine3.11
